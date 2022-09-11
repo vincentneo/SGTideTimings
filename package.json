@@ -1,0 +1,16 @@
+{
+  "name": "sgtidetimings",
+  "version": "1.0.0",
+  "description": "Tide Timings from NEA, in a machine readable format.",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "Vincent Neo",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "jsdom": "^20.0.0",
+    "luxon": "^3.0.3"
+  }
+}
