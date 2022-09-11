@@ -1,7 +1,16 @@
 # SGTideTimings
 This project generates tide timings JSONs by web scrapping from https://www.nea.gov.sg/weather/tide-timings tables.
 
-## Usage
+
+## Usage of codes
+
+Codes are tested on Node.js v16 only, as of point of writing. Other versions, use at own risk!
+- Run `npm run start` to generate current and next month's JSONs on your own machine. 
+- Run `npm run actions` to generate with an extra `latest.json` to reflect current month tide timings, and save all months at `archives/` directory. Designed for current GitHub Actions script use.
+
+Always remember to install the dependencies! 🙂
+
+## Usage of APIs
 Current month's tide timings can be accessed by:
 ```
 https://vincentneo.github.io/SGTideTimings/latest.json
@@ -45,7 +54,7 @@ NEA / data.gov.sg currently does not have an API for tide timings prediction, un
 ## License
 
 ### Regarding code
-Codes in the `main` branch repository, which contains code that does the web scraping, etc, is licensed under MIT License.
+Codes in the `main` branch of the repository, which contains code that does the web scraping, etc, is licensed under MIT License.
 
 ### Regarding generated contents
-Generated contents contains information from Tide Timings table, and will be accessed every 1st and 2nd day of each month from [NEA](https://www.nea.gov.sg/weather/tide-timings) which is made available under the terms of the [Singapore Open Data Licence version 1.0](https://www.nea.gov.sg/open-data-licence).
+Generated contents (including `gh-pages` branch contents) contains information from Tide Timings table, and will be accessed every 1st and 2nd day of each month from [National Environment Agency (NEA) / Maritime and Port Authority of Singapore (MPA)](https://www.nea.gov.sg/weather/tide-timings) which is made available under the terms of the [Singapore Open Data Licence version 1.0](https://www.nea.gov.sg/open-data-licence).
