@@ -11,6 +11,7 @@ Previous/Future month's tide timings, by month and year, can be accessed by:
 https://vincentneo.github.io/SGTideTimings/archives/2022-09.json
 https://vincentneo.github.io/SGTideTimings/archives/{yyyy}-{MM}.json
 ```
+You must adhere to the terms of the [Singapore Open Data Licence version 1.0](https://www.nea.gov.sg/open-data-licence) when using the tide timings data.
 
 ## Format
 JSONs are formatted as array with objects of such format:
