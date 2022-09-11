@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "description": "Tide Timings from NEA, in a machine readable format.",
   "scripts": {
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "actions": "node src/index.js -a"
   },
   "author": "Vincent Neo",
   "license": "MIT",

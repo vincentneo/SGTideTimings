@@ -1,7 +1,13 @@
 import axios from "axios";
+import { existsSync, mkdirSync } from "fs";
 import { writeFile } from "fs/promises";
 import { JSDOM } from "jsdom";
 import { DateTime } from "luxon";
+
+const args = process.argv.slice(2);
+const forGitHubActions = args[0] === "-a";
+
+const singaporeTimeZone = "Asia/Singapore";
 
 try {
 
@@ -16,6 +22,19 @@ try {
      * @type {JSDOM}
      */
     const dom = new JSDOM(response.data);
+
+    console.log("Preparing directories\n");
+
+    const rootResultsFolderName = "results/";
+    const archivesFolderName = `${rootResultsFolderName}archives/`;
+
+    if (!existsSync(rootResultsFolderName)) {
+        mkdirSync(rootResultsFolderName);
+    }
+
+    if (forGitHubActions && !existsSync(archivesFolderName)) {
+        mkdirSync(archivesFolderName, {recursive: true});
+    }
 
     let yearsByMonth = {};
 
@@ -50,7 +69,6 @@ try {
             if (cells[0].getAttribute("rowspan") !== null) {
                 currentDay = Number.parseInt(cells[0].textContent);
                 isParentRow = true;
-                continue;
             }
 
             const time = DateTime.fromFormat(cells[isParentRow ? 1 : 0].textContent, "HHmm");
@@ -64,7 +82,7 @@ try {
                     day: currentDay, 
                     hour: time.hour, 
                     minute: time.minute
-                }, { zone: "Asia/Singapore" });
+                }, { zone: singaporeTimeZone });
 
             data.push(
                 {
@@ -76,19 +94,40 @@ try {
         }
 
         console.log(`Completed parsing for ${month}/${year}`);
+
         const filenameDt = DateTime.fromObject({year: year, month: month}).toFormat("yyyy-LL");
         const filename = `${filenameDt}.json`;
-        console.log(`Start writing ${filename}`);
-        writeFile(filename, JSON.stringify(data))
-        .then(() => {
-            console.log(`Completed writing ${filename}`);
-        })
-        .catch((error) => {
-            console.error(`Failed writing with error: ${error}`);
-        });
+
+        let path;
+
+        if (forGitHubActions) {
+            path = `${archivesFolderName}${filename}`;
+
+            if (DateTime.now().setZone(singaporeTimeZone).month === month) {
+                const latestPath = `${rootResultsFolderName}latest.json`;
+                writeFileAndIgnore(latestPath, JSON.stringify(data));
+            }
+        } 
+        else {
+            path = `${rootResultsFolderName}${filename}`;
+        }
+
+        writeFileAndIgnore(path, JSON.stringify(data));
     }
 
 }
 catch (error) {
     console.error(`Failed with error: ${error}`);
+}
+
+
+function writeFileAndIgnore(path, serializedData) {
+    console.log(`Start writing ${path}`);
+    writeFile(path, serializedData)
+    .then(() => {
+        console.log(`Completed writing ${path}`);
+    })
+    .catch((error) => {
+        console.error(`Failed writing with error: ${error}`);
+    });
 }
