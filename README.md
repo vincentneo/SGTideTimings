@@ -34,10 +34,12 @@ In metres, and according to [NEA](https://www.nea.gov.sg/weather/tide-timings):
 #### classification
 Whether if tide is classified as high (H) or low (L). 
 
-## Why make this?
-NEA / data.gov.sg currently does not have an API for tide timings, unlike many other data provided on the NEA website.
+## How it works
 
-This uses GitHub Actions to auto scrape, generate usable JSON files and deploy to the `gh-pages` branch of this repo, automatically.
+This uses GitHub Actions to automatically scrape, generate usable JSON files and deploy to the `gh-pages` branch of this repo, automatically.
+
+## Why make this?
+NEA / data.gov.sg currently does not have an API for tide timings prediction, unlike many other data provided on the NEA website.
 
 ## License
 
