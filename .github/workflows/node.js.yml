@@ -4,8 +4,11 @@
 name: Auto 
 
 on:
-  push:
-    branches: [ "main" ]
+  schedule:
+    # Runs at 4PM UTC/12AM SGT every 1st day of every month. 
+    - cron:  '0 16 1 * *'
+    # Runs at 4PM UTC/12AM SGT every 2nd day of every month, in case NEA didn't update yet.
+    - cron:  '0 16 2 * *'
 
 jobs:
   build:
