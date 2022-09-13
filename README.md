@@ -1,5 +1,5 @@
 # SGTideTimings
-This project generates tide timings JSONs by web scrapping from https://www.nea.gov.sg/weather/tide-timings tables.
+This project generates tide timings JSONs by web scraping from https://www.nea.gov.sg/weather/tide-timings tables.
 
 
 ## Usage of codes
