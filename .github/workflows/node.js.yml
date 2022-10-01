@@ -2,10 +2,9 @@ name: Tide Timings Scrape & Deploy
 
 on:
   schedule:
-    # Runs at 4PM UTC/12AM SGT every 1st day of every month. 
-    - cron:  '0 16 1 * *'
-    # Runs at 4PM UTC/12AM SGT every 2nd day of every month, in case NEA didn't update yet.
-    - cron:  '0 16 2 * *'
+    # Runs at 8:20AM UTC, on 1st day of each month.
+    # =    at 4:20PM SGT, on 1st day of each month.
+    - cron:  '20 8 1 * *'
 
 jobs:
   build:
